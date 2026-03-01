@@ -1,0 +1,127 @@
+<template>
+  <view class="ucenter">
+    <Header />
+    <view class="profile">
+      <image :src="getFullUrl(userInfo.avatar)" mode="aspectFill" class="avatar" @click="goToBasic" />
+      <view class="info">
+        <text class="nickname">{{ userInfo.nickname || '未登录' }}</text>
+        <text class="mobile">{{ userInfo.mobile }}</text>
+      </view>
+    </view>
+    <view class="menu-list">
+      <view class="menu-item" @click="checkLoginAndNavigate('/pages/ucenter/password')">
+        <text class="iconfont icon-password"></text>
+        <text>修改密码</text>
+      </view>
+      <view class="menu-item" @click="checkLoginAndNavigate('/pages/ucenter/collect')">
+        <text class="iconfont icon-collect"></text>
+        <text>收藏课程</text>
+      </view>
+      <view class="menu-item" @click="checkLoginAndNavigate('/pages/ucenter/study')">
+        <text class="iconfont icon-study"></text>
+        <text>学习记录</text>
+      </view>
+      <view class="menu-item" @click="logout" v-if="userInfo.id">
+        <text class="iconfont icon-logout"></text>
+        <text>退出登录</text>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import Header from '@/components/Header.vue'
+import { getFullUrl } from '@/utils/tools'
+
+const userInfo = ref({})
+
+onMounted(() => {
+  const userStr = uni.getStorageSync('oes_ucenter')
+  if (userStr) {
+    try {
+      userInfo.value = JSON.parse(userStr)
+    } catch (e) {
+      userInfo.value = {}
+    }
+  }
+})
+
+const goToBasic = () => {
+  uni.navigateTo({ url: '/pages/ucenter/basic' })
+}
+
+const checkLoginAndNavigate = (url) => {
+  const token = uni.getStorageSync('oes_token')
+  if (!token) {
+    uni.navigateTo({ url: '/pages/login/login' })
+    return
+  }
+  uni.navigateTo({ url })
+}
+
+const logout = () => {
+  uni.removeStorageSync('oes_token')
+  uni.removeStorageSync('oes_ucenter')
+  userInfo.value = {}
+  uni.showToast({ title: '已退出', icon: 'success' })
+  setTimeout(() => {
+    uni.switchTab({ url: '/pages/index/index' })
+  }, 1500)
+}
+</script>
+
+<style scoped>
+.ucenter {
+  background: #f8f8f8;
+  min-height: 100vh;
+}
+.profile {
+  background: #fff;
+  padding: 40rpx 30rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+.info {
+  flex: 1;
+}
+.nickname {
+  font-size: 36rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+.mobile {
+  font-size: 28rpx;
+  color: #999;
+}
+.menu-list {
+  background: #fff;
+  padding: 0 30rpx;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+.menu-item:last-child {
+  border-bottom: none;
+}
+.menu-item .iconfont {
+  font-size: 40rpx;
+  color: #3edeb3;
+  margin-right: 30rpx;
+}
+.menu-item text:last-child {
+  font-size: 30rpx;
+  color: #333;
+}
+</style>

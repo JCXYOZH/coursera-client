@@ -1,0 +1,1 @@
+import{r}from"./index-B8S_W3SP.js";const e={createOrder:e=>r({url:`user/order/payOrder/generateOrder/${e}`,method:"POST"}),getOrder:e=>r({url:`user/order/payOrder/getOrderInfo/${e}`,method:"GET"}),createNative:e=>r({url:`user/order/payLog/generateOrCode/${e}`,method:"GET"}),queryOrderStatus:e=>r({url:`user/order/payLog/queryOrderState/${e}`,method:"GET"})};export{e as o};

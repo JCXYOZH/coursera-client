@@ -1,0 +1,1 @@
+import{O as s,P as t,Q as a,R as o,T as r}from"./index-B8S_W3SP.js";const p=(o,r=0)=>(r,p=a())=>{!s&&t(o,r,p)},i=p(o,3),h=p(r,2),c=s=>s?s.startsWith("http://")||s.startsWith("https://")?s:"https://your-production-domain.com/"+s.replace(/^\/+/,""):"";export{i as a,c as g,h as o};
