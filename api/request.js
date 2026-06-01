@@ -1,5 +1,8 @@
 // api/request.js
-const BASE_URL = 'http://localhost:8500'  // 确保末尾没有斜杠
+// const BASE_URL = 'http://localhost:8500'
+// const BASE_URL = 'http://6535d93f.r16.vip.cpolar.cn'  // 确保末尾没有斜杠
+
+import BASE_URL from '@/config'   // 统一从配置文件导入
 
 const request = (options) => {
   return new Promise((resolve, reject) => {

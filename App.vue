@@ -1,7 +1,28 @@
+<template>
+  <view>
+    <!-- 版本更新弹窗 -->
+    <VersionUpdate
+      v-if="showUpdate"
+      :versionInfo="versionInfo"
+      @close="showUpdate = false"
+    />
+  </view>
+</template>
+
 <script>
 import { checkVersion } from '@/utils/version'
+import VersionUpdate from '@/components/VersionUpdate.vue'
 
 export default {
+  components: {
+    VersionUpdate
+  },
+  data() {
+    return {
+      showUpdate: false,
+      versionInfo: null
+    }
+  },
   onLaunch: function() {
     console.log('App Launch')
     // #ifdef APP-PLUS
@@ -22,10 +43,11 @@ export default {
         const res = await checkVersion(currentVersion)
         if (res.code === 20000 && res.data) {
           const latestVersion = res.data.versionName
-          // 比较版本号（这里简单字符串比较，可按需使用 semver 比较）
+          // 比较版本号
           if (this.compareVersion(latestVersion, currentVersion) > 0) {
             // 需要更新
-            this.showVersionUpdate(res.data)
+            this.versionInfo = res.data
+            this.showUpdate = true
           }
         }
       } catch (err) {
@@ -33,7 +55,6 @@ export default {
       }
     },
     compareVersion(v1, v2) {
-      // 简单版本比较，例如 "1.2.3" 转数字数组比较
       const arr1 = v1.split('.').map(Number)
       const arr2 = v2.split('.').map(Number)
       for (let i = 0; i < Math.max(arr1.length, arr2.length); i++) {
@@ -43,17 +64,6 @@ export default {
         if (n1 < n2) return -1
       }
       return 0
-    },
-    showVersionUpdate(versionInfo) {
-      // 动态导入组件并显示
-      import('@/components/VersionUpdate.vue').then(module => {
-        const VersionUpdate = module.default
-        const updateComponent = new VersionUpdate({
-          propsData: { versionInfo }
-        })
-        updateComponent.$mount()
-        uni.$emit('version-update', versionInfo)
-      })
     }
   }
 }

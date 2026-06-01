@@ -1,0 +1,1 @@
+import{r as e}from"./index-QJUQzxe3.js";const r={pageQueryTeacher:(r,a)=>e({url:`user/edu/teacher/pageQueryTeacher/${r}/${a}`,method:"GET"}),getTeacherAndCourse:r=>e({url:`user/edu/teacher/getTeacherAndCourse/${r}`,method:"GET"})};export{r as t};

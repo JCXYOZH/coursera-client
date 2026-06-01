@@ -1,0 +1,1 @@
+import{O as s,P as a,Q as t,R as r,T as o,U as p}from"./index-QJUQzxe3.js";const e=(r,o=0)=>(o,p=t())=>{!s&&a(r,o,p)},h=e(r,3),i=e(o,2),c=s=>s?s.startsWith("http://")||s.startsWith("https://")?s:p+"/"+s.replace(/^\/+/,""):"";export{h as a,c as g,i as o};

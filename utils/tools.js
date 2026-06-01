@@ -1,7 +1,12 @@
 // utils/tools.js
-const BASE_URL = process.env.NODE_ENV === 'development' 
-  ? 'http://localhost:8500' 
-  : 'https://your-production-domain.com' // 替换为实际生产地址
+// const BASE_URL = process.env.NODE_ENV === 'development' 
+//   ? 'http://localhost:8500' 
+//   : 'https://your-production-domain.com' // 替换为实际生产地址
+  
+  // ? 'http://6535d93f.r16.vip.cpolar.cn'
+  // : 'http://6535d93f.r16.vip.cpolar.cn'
+  
+import BASE_URL from '@/config'   // 统一从配置文件导入
 
 /**
  * 获取完整URL（处理相对路径）

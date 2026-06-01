@@ -1,0 +1,1 @@
+import{r as e}from"./index-QJUQzxe3.js";const r={checkMobile:r=>e({url:`user/ucenter/member/checkMobile/${r}`,method:"get"}),submitRegister:r=>e({url:"user/ucenter/member/userRegister",method:"post",data:r}),sendVerificationCode:r=>e({url:`user/sms/getVerificationCode/${r}`,method:"get"})};export{r};

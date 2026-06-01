@@ -1,6 +1,6 @@
 {
     "name" : "知新堂",
-    "appid" : "__UNI__65B29C2",
+    "appid" : "__UNI__459AA82",
     "description" : "知新堂客户端",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -113,6 +113,10 @@
     "vueVersion" : "3",
     "h5" : {
         "title" : "知新堂",
-        "format" : "es"
+        "format" : "es",
+        "publicPath" : "/phone/",
+        "router" : {
+            "base" : "/phone/"
+        }
     }
 }
